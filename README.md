@@ -31,11 +31,5 @@ An IoT-based smart system for monitoring and controlling plant care using temper
 - `database/`: SQL schema/sample
 - `docs/`: Reports and images
 
-## 👨‍💻 Team
-- Dinh Duc Duy – 22134001
-- Huynh Thanh Phong – 22134009
-- Nguyen Quoc Trung – 22134016
-- Lecturer: PhD. Bui Ha Duc – HCMUTE
 
-## 📜 License
-This project is licensed under the MIT License.
+
