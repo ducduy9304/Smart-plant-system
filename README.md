@@ -21,9 +21,9 @@ An IoT-based smart system for monitoring and controlling plant care using temper
 - Threshold tuning for smart actions
 
 ## 🖼 Screenshots
-![Dashboard](./docs/dashboard.png)
-![Schedule](./docs/schedule.png)
-![Overview](./docs/overview.png)
+![Dashboard](./Review/Dashboard.jpeg)
+![Schedule](./Review/schedule.jpeg)
+![Overview](./Review/overview.jpeg)
 
 ## 📁 Folder Structure
 - `frontend/`: Web UI files
