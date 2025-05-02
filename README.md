@@ -22,8 +22,8 @@ An IoT-based smart system for monitoring and controlling plant care using temper
 
 ## 🖼 Screenshots
 ![Dashboard](./Review/Dashboard.jpeg)
-![Schedule](./Review/schedule.jpeg)
-![Overview](./Review/overview.jpeg)
+![Schedule](./Review/Schedule.jpeg)
+![Overview](./Review/Overview.jpeg)
 
 ## 📁 Folder Structure
 - `frontend/`: Web UI files
