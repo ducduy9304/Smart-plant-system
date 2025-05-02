@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Event</title>
+    <link rel="stylesheet" href="schedule.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Blank UI with + New Event -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <button id="newEventButton" class="new-event-button">+ New Event</button>
+        </header>
+
+        <div id="formBackground" class="form-background hidden"></div>
+
+
+        <!-- Event List Container -->
+        <div id="eventList" class="event-list"></div>
+
+        <!-- Form (hidden by default) -->
+        <div id="formModal" class="modal hidden">
+            <div id="scheduleFormContainer" class="form-container hidden">
+                <h1>Schedule a New Event</h1>
+                <form id="scheduleForm">
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        <label for="imageFile">Upload Image:</label>
+                        <input type="file" id="imageFile" name="imageFile" accept="image/*">
+                    </div>
+    
+                    <!-- Plant Name -->
+                    <div class="form-group">
+                        <label for="plantName">Plant Name:</label>
+                        <input type="text" id="plantName" name="plantName" placeholder="Enter plant name" required>
+                    </div>
+    
+                    <!-- Location -->
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" placeholder="Enter location" required>
+                    </div>
+    
+                    <!-- Host -->
+                    <div class="form-group">
+                        <label for="host">Host:</label>
+                        <input type="text" id="host" name="host" placeholder="Enter host name" required>
+                    </div>
+    
+                    <!-- Date Input -->
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+    
+                    <!-- Time Input -->
+                    <div class="form-group">
+                        <label for="time">Time:</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+    
+                    <!-- Action Selection -->
+                    <div class="form-group">
+                        <label>Actions:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="pump" name="action" value="pump"> Pump</label>
+                            <label><input type="checkbox" id="led" name="action" value="led"> LED</label>
+                        </div>
+                    </div>
+    
+
+                    <div class="form-actions">
+                        <button type="submit">Submit</button>
+                        <button type="button" id="cancelButton">Cancel</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+
+ 
+
+
+
+    </div>
+
+    <script>
+        // Get references to elements
+        const newEventButton = document.getElementById('newEventButton');
+        const formModal = document.getElementById('formModal');
+        const formBackground = document.getElementById('formBackground');
+        const scheduleFormContainer = document.getElementById('scheduleFormContainer');
+        const eventList = document.getElementById('eventList');
+    
+        // Show the modal
+        newEventButton.addEventListener('click', function () {
+            formModal.classList.add('visible'); 
+            formBackground.classList.add('visible');
+            scheduleFormContainer.classList.add('visible'); // Ensure the container also appears
+        });
+    
+        formBackground.addEventListener('click', function () {
+            formModal.classList.remove('visible');
+            formBackground.classList.remove('visible');
+            scheduleFormContainer.classList.remove('visible');
+        });
+    
+        // Hide modal and background on form submission
+        document.getElementById('scheduleForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+    
+            const imageFile = document.getElementById('imageFile').files[0];
+            const plantName = document.getElementById('plantName').value;
+            const location = document.getElementById('location').value;
+            const host = document.getElementById('host').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const pumpChecked = document.getElementById('pump').checked;
+            const ledChecked = document.getElementById('led').checked;
+    
+            const actions = [];
+            if (pumpChecked) actions.push("Pump");
+            if (ledChecked) actions.push("LED");
+    
+            // Create the event block
+            const eventBlock = document.createElement('div');
+            eventBlock.classList.add('event-block');
+    
+            // Display date and time
+            const dateTime = document.createElement('h4');
+            dateTime.textContent = `${date} ${time}`;
+            eventBlock.appendChild(dateTime);
+    
+            // Display plant name
+            const plantNameElement = document.createElement('h3');
+            plantNameElement.textContent = plantName;
+            eventBlock.appendChild(plantNameElement);
+    
+            // Create the main content section with image and details
+            const contentSection = document.createElement('div');
+            contentSection.classList.add('content-section');
+    
+            // Image section
+            const imageSection = document.createElement('div');
+            imageSection.classList.add('image-section');
+            const image = document.createElement('img');
+            if (imageFile) {
+                image.src = URL.createObjectURL(imageFile);
+            }
+            image.alt = plantName;
+            imageSection.appendChild(image);
+            contentSection.appendChild(imageSection);
+    
+            // Details section
+            const detailsSection = document.createElement('div');
+            detailsSection.classList.add('details-section');
+            detailsSection.innerHTML = `
+                <p><strong>Location:</strong> ${location}</p>
+                <p><strong>Host:</strong> ${host}</p>
+                <p><strong>Actions:</strong> ${actions.join(', ')}</p>
+            `;
+            contentSection.appendChild(detailsSection);
+    
+            // Append content section to event block
+            eventBlock.appendChild(contentSection);
+    
+            // Add the event block to the event list
+            eventList.appendChild(eventBlock);
+    
+            // Hide the modal and reset the form
+            formModal.classList.remove('visible');
+            formBackground.classList.remove('visible');
+            document.getElementById('scheduleForm').reset();
+        });
+    
+        // Get the cancel button
+        const cancelButton = document.getElementById('cancelButton');
+    
+        // Add event listener for the "Cancel" button
+        cancelButton.addEventListener('click', function () {
+            // Remove the "visible" class to hide the modal and background
+            formModal.classList.remove('visible');
+            formBackground.classList.remove('visible');
+            scheduleFormContainer.classList.remove('visible');
+    
+            // Reset the form fields (optional, if you want to clear data)
+            document.getElementById('scheduleForm').reset();
+        });
+    </script>
+    
+</body>
+</html>
