@@ -9,9 +9,9 @@ An IoT-based smart system for monitoring and controlling plant care using temper
 ## 🔧 Tech Stack
 - MQTT protocol (Mosquitto)
 - HTML/CSS/JavaScript dashboard
-- SQLite/MySQL database
+- MySQL database
 - ESP32 microcontroller
-- Python/Node.js backend (optional)
+- Python/Node.js backend 
 
 ## 📊 Features
 - Live dashboard with temperature & humidity graph
