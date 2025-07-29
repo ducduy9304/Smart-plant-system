@@ -27,8 +27,8 @@ An IoT-based smart system for monitoring and controlling plant care using temper
 
 
 ## 📁 Folder Structure
-- `frontend/`: Web UI files
-- `backend/`: MQTT + DB logic
+- `frontend/`: Web UI files.
+- `backend/`: MQTT + DB logic.
 
 
 
